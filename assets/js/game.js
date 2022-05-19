@@ -2,9 +2,10 @@
 var playerName = window.prompt("What is your robot's name?");
 var playerHealth = 100;
 var playerAttack = 10;
+var playerMoney = 10;
 
 // log multiple values at once
-console.log(playerName, playerHealth, playerAttack);
+console.log(playerName, playerHealth, playerAttack, playerMoney);
 
 var enemyName = "Roberto";
 var enemyHealth = 50;
@@ -13,7 +14,12 @@ var enemyAttack = 12;
 var fight = function() {
     // alert players that they are starting the round
     window.alert("Welcome to Robot Gladiators!");
-     // Subtract the value of `playerAttack` from the value of `enemyHealth` and use that result to update the value in the `enemyHealth` variable
+    // ask player if they would like to skip or fight
+
+    var promptFight = window.prompt("Would you like to FIGHT or SKIP this battle? Enter 'FIGHT' or 'SKIP' to choose.");
+
+    if (promptFight === "fight" || promptFight === "FIGHT") {
+    // Subtract the value of `playerAttack` from the value of `enemyHealth` and use that result to update the value in the `enemyHealth` variable
     enemyHealth = enemyHealth - playerAttack;
     // Log a resulting message to the console so we know that it worked.
     console.log(
@@ -37,6 +43,29 @@ var fight = function() {
     }
     else {
         window.alert(playerName + " still has " + playerHealth + " health left.");
+    }
+    }
+
+    // if players choose to skip
+    else if (promptFight === "skip" || promptFight === "SKIP") {
+        // confirm player wants to skip
+        var confirmSkip = window.confirm("Are you sure you'd like to quit?");
+        // if yes, leave fight
+        if (confirmSkip) {
+            window.alert(playerName + " has decided to skip this fight. Goodbye!");
+            // subtract money for skipping
+            playerMoney = playerMoney - 2;
+            console.log(playerName + " lost money points. " + playerName + " now has " + playerMoney + " money points remaining .");
+        }
+        // if no, ask question again by running fight function
+        else {
+            fight();
+        }
+    }
+
+    // if player inputs invalid option
+    else {
+        window.alert("You need to choose a valid option. Try again!");
     }
 };
 
